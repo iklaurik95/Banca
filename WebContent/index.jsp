@@ -4,22 +4,46 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Añadir Cliente</title>
+<title>Formulario Banca</title>
 </head>
+<%@ page import="eus.kutxa.modelo.*"%>
+<%@ page import="java.util.*"%>
+<%
+	ModeloHerria modeloHerria = new ModeloHerria();
+	ModeloBezero modeloBezero = new ModeloBezero();
+		
+	ArrayList<Herria> herriak = modeloHerria.select();
+	ArrayList<Bezero> bezeroak = modeloBezero.selectAll();
+	
+	String izena = request.getParameter("nombre");
+	String abizena = request.getParameter("apellido");
+	//String herria = request.getParameter("ciudad");
+	
+	Bezero bezero = new Bezero();
+	bezero.setIzena(izena);
+	bezero.setAbizena(abizena);
+	
+%>
+
 <body>
-	<h1>
-	Nombre:<input type="text" name="nombre" value="">
+	<h1>AÑADIR CLIENTE</h1>
+	<br>
+	Nombre:<input type="text" name="nombre" value=""><br>
 	Apellido:<input type="text" name="apellido" value="">
-	</h1>
+	<br>
 	<input type="submit" name="eliminar" value="Eliminar">
 	<br>
 	<h3>
 		<span class="label label-default">Ciudad</span>
 	</h3>
 		<div class="radio">
-			<input type="radio" name="ciudad" id="" value=""> 			
+		<%for(Herria herria:herriak){ %>
+			<input type="radio" name="ciudad" id="" value="<%=herria.getId()%>"><%=herria.getIzena()%></input>
+		<%}%> 			
 		</div>	
 	<input type="submit" name="guardar" value="Guardar">
+	<br>
+	<h1>DATOS CLIENTE</h1>
 	<br>
 	<div class="row">
 			<div class="col-md-8 col-md-offset-2">
@@ -29,8 +53,13 @@
 						Elige un cliente: <span class="label label-default"></span>
 						</h3>
 
-						<select class="form-control" name="idCorredor">
-							<option value=""></option> 
+						<select class="form-control" name="cliente">
+							<%for(Bezero bezero:bezeroak){ %>
+							<%
+							 
+							%>
+							<option value=""></option>
+							<%}%> 
 						</select>
 					</div>
 				</form>
