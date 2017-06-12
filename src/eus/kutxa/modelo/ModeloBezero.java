@@ -48,6 +48,7 @@ public class ModeloBezero extends Conectar{
 				bezero.setIzena(rs.getString("izena"));
 				bezero.setAbizena(rs.getString("abizena"));
 				bezero.setHerria(rs.getString("herria"));	
+				bezero.
 				
 				bezeroak.add(bezero);
 			}
