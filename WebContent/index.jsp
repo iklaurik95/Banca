@@ -11,17 +11,25 @@
 <%
 	ModeloHerria modeloHerria = new ModeloHerria();
 	ModeloBezero modeloBezero = new ModeloBezero();
+	
+	if(request.getParameter("nombre") != null && request.getParameter("apellido") != null && request.getParameter("ciudad") != null){
+		String izena = request.getParameter("nombre");
+		String abizena = request.getParameter("apellido");
+		String idHerria = request.getParameter("ciudad");
+			
+		Bezero nuevoBezero = new Bezero();
+		nuevoBezero.setIzena(izena);
+		nuevoBezero.setAbizena(abizena);
+		nuevoBezero.setIdHerria(Integer.parseInt(idHerria));
+		
+		modeloBezero.insertar(nuevoBezero);
+		
+		System.out.print("Bezero nuevo insertado");
+	}
 		
 	ArrayList<Herria> herriak = modeloHerria.select();
 	ArrayList<Bezero> bezeroak = modeloBezero.selectAll();
 	
-	String izena = request.getParameter("nombre");
-	String abizena = request.getParameter("apellido");
-	//String herria = request.getParameter("ciudad");
-	
-	Bezero bezero = new Bezero();
-	bezero.setIzena(izena);
-	bezero.setAbizena(abizena);
 	
 %>
 
@@ -31,14 +39,13 @@
 	Nombre:<input type="text" name="nombre" value=""><br>
 	Apellido:<input type="text" name="apellido" value="">
 	<br>
-	<input type="submit" name="eliminar" value="Eliminar">
-	<br>
+	
 	<h3>
 		<span class="label label-default">Ciudad</span>
 	</h3>
 		<div class="radio">
 		<%for(Herria herria:herriak){ %>
-			<input type="radio" name="ciudad" id="" value="<%=herria.getId()%>"><%=herria.getIzena()%></input>
+			<input type="radio" name="ciudad" id="" value="<%=herria.getId()%>"/><%=herria.getIzena()%><br>
 		<%}%> 			
 		</div>	
 	<input type="submit" name="guardar" value="Guardar">
@@ -54,11 +61,8 @@
 						</h3>
 
 						<select class="form-control" name="cliente">
-							<%for(Bezero bezero:bezeroak){ %>
-							<%
-							 
-							%>
-							<option value=""></option>
+							<%for(Bezero bezero:bezeroak){ %>									 					
+							<option value="<%=bezero.getId()%>"><%=bezero.getIzena()%> <%=bezero.getAbizena() %></option>
 							<%}%> 
 						</select>
 					</div>
@@ -75,13 +79,14 @@
 						<th>abizena</th>
 						<th>herria</th>
 					</tr>
-					
+					<%for(Bezero bezero:bezeroak){ %>
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>					
+						<td><%=bezero.getIzena()%></td>
+						<td><%=bezero.getAbizena()%></td>
+						<td><%=bezero.getIdHerria()%></td>
+						<td><a href="index.jsp?id=<%=bezero.getId()%>">Borrar</a></td>						
+					</tr>
+					<%}%>					
 				</table>
 			</div>
 	</div>

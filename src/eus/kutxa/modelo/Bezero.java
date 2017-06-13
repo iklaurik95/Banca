@@ -3,10 +3,18 @@ package eus.kutxa.modelo;
 import java.util.ArrayList;
 
 public class Bezero {
+	public int getIdHerria() {
+		return idHerria;
+	}
+
+	public void setIdHerria(int idHerria) {
+		this.idHerria = idHerria;
+	}
+
 	private int id;
 	private String izena;
 	private String abizena;
-	private Herria herria;
+	private int idHerria;
 	private ArrayList<Kontua> kontuak;
 
 	public int getId() {
@@ -33,13 +41,7 @@ public class Bezero {
 		this.abizena = abizena;
 	}
 
-	public Herria getHerria() {
-		return herria;
-	}
-
-	public void setHerria(Herria herria) {
-		this.herria = herria;
-	}
+	
 
 	public ArrayList<Kontua> getKontuak() {
 		return kontuak;

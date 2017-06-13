@@ -14,17 +14,14 @@ public class ModeloBezero extends Conectar{
 	}
 	
 	public void insertar (Bezero bezero){
-		
-		Herria herria = new Herria();
-				
+								
 		try {
 			
-			PreparedStatement pst = cn.prepareStatement("INSERT INTO bezero(id,izena,abizena,herria) VALUES (?,?,?,?)");
-			
-			pst.setInt(1, bezero.getId() );
-			pst.setString(2, bezero.getIzena());
-			pst.setString(3, bezero.getAbizena());
-			//pst.setInt(4, bezero.setHerria(herria));
+			PreparedStatement pst = cn.prepareStatement("INSERT INTO bezero(izena,abizena,herria) VALUES (?,?,?)");
+					
+			pst.setString(1, bezero.getIzena());
+			pst.setString(2, bezero.getAbizena());
+			pst.setInt(3, bezero.getIdHerria());
 						
 			pst.execute();
 			
@@ -47,8 +44,8 @@ public class ModeloBezero extends Conectar{
 				bezero.setId(rs.getInt("id"));
 				bezero.setIzena(rs.getString("izena"));
 				bezero.setAbizena(rs.getString("abizena"));
-				bezero.setHerria(rs.getString("herria"));	
-				bezero.
+				bezero.setIdHerria(rs.getInt("herria"));
+				
 				
 				bezeroak.add(bezero);
 			}
@@ -63,5 +60,7 @@ public class ModeloBezero extends Conectar{
 		return bezeroak;
 		
 	}
+	
+
 
 }
